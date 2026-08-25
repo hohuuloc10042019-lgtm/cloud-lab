@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # Câu 81: Khai báo Service backend
+  backend:
+    build: ./server
+    container_name: mern-backend
+    # Câu 83: Ánh xạ port 5000 local ra 5000 container
+    ports:
+      - "5000:5000"
+    # Câu 85: Cấu hình biến môi trường kết nối MongoDB Atlas (db cloud_lab)
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb+srv://s237253_db_user:X5Ttw0TYyUR3LGMw@cloud-lab.vynwlvy.mongodb.net/cloud_lab?retryWrites=true&w=majority
+    dns:
+      - 8.8.8.8
+
+  # Câu 82: Khai báo Service frontend
+  frontend:
+    build: ./client
+    container_name: mern-frontend
+    # Câu 84: Ánh xạ port 3000 local ra 80 container (Nginx)
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend

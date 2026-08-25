@@ -1,4 +1,5 @@
 const express = require('express');
+global.crypto = require('crypto');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
@@ -9,7 +10,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI)
+// Dòng mới (đã hardcode chuỗi kết nối dự phòng):
+const mongoURI = process.env.MONGODB_URI || "mongodb+srv://s237253_db_user:X5Ttw0TYyUR3LGMw@cloud-lab.vynwlvy.mongodb.net/cloud_lab?retryWrites=true&w=majority";
+mongoose.connect(mongoURI)
   .then(() => console.log('Kết nối MongoDB Atlas thành công!'))
   .catch(err => console.error('Lỗi kết nối MongoDB:', err));
 
