@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  backend:
+    image: hohuuloc1004/mern-backend:1.0
+    container_name: mern-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb+srv://s237253_db_user:X5Ttw0TYyUR3LGMw@cloud-lab.vynwlvy.mongodb.net/cloud_lab?retryWrites=true&w=majority
+    dns:
+      - 8.8.8.8
+
+  frontend:
+    image: hohuuloc1004/mern-frontend:2.0
+    container_name: mern-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
