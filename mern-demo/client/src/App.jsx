@@ -5,7 +5,7 @@ function App() {
   const [formData, setFormData] = useState({ studentId: '', name: '', email: '' });
   const [editingId, setEditingId] = useState(null);
 
-  const API_URL = 'http://localhost:5000/api/students';
+  const API_URL = import.meta.env.VITE_API_URL || 'https://mern-backend-237253.onrender.com/api/students';
 
   // Lấy danh sách sinh viên
   const fetchStudents = async () => {
