@@ -18,6 +18,7 @@ mongoose.connect(mongoURI)
 
 app.get('/api/hello', (req, res) => {
   res.json({ message: 'Backend đang hoạt động thành công!' });
+  
 });
 
 app.get('/api/students', async (req, res) => {
@@ -55,6 +56,20 @@ app.delete('/api/students/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'UP',
+    timestamp: new Date(),
+    uptime: process.uptime()
+  });
+});
+app.get('/api/test-error', (req, res) => {
+  console.error('LAB6: Simulated error');
+  res.status(500).json({
+    error: 'Simulated server error'
+  });
+});
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+ console.log('Backend Lab 06 - Auto Deploy - Version 1.2');
+
